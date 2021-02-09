@@ -3,7 +3,7 @@
 int main(void){
   printf("$ ");
   char input = getchar();
-  while(input != EOF){
+  while(input != '\n'){
     if(input == ' '){
       putchar('\n');
     }
