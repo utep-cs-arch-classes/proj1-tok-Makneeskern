@@ -9,6 +9,9 @@ int space_char(char c){
 }
 
 int non_space_char(char c){
+  if(c != ' ' && c != '\n' && c != '\t' && c != '\0'){
+    return 1;
+  }
   return 0;
 }
 
