@@ -3,15 +3,13 @@
 int main(void){
   printf("$ ");
   char input = getchar();
-  while(input != '\n'){
-    if(input == ' '){
-      putchar('\n');
-    }
-    else{
+  while(1){
+    while(input != '\0'){
+      if (input == '|'){return 1;}
       putchar(input);
+      input = getchar();
     }
-    input = getchar();
+    putchar('\n');
   }
   putchar('\n');
-  return 0;
 }
