@@ -16,7 +16,10 @@ int non_space_char(char c){
 }
 
 char *word_start(char *str){
-  return 'A';
+  while(space_char(*str)){
+    str += 1;
+  }
+  return *str;
 }
 
 char *word_end(char *str){
