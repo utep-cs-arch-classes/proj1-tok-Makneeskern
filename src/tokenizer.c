@@ -67,6 +67,10 @@ char **tokenize(char* str){
 }
 
 void print_tokens(char **tokens){
+  int counter = 0;
+  while(*(tokens + counter) != 0){
+    printf("%s\n",*(tokens + counter));
+  }
 }
 
 void free_tokens(char **tokens){
