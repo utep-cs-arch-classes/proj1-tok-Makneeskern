@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "tokenizer.h"
 
 int space_char(char c){
@@ -47,14 +48,21 @@ int count_words(char *str){
   words -= 1;
   return words;
 }
-/*
+
 char *copy_str(char *inStr, short len){
-  return 'A';
+  short counter = 0;
+  char *copy = (char *) malloc(sizeof(char) * len);
+  for(;counter < len && *inStr != 0; counter++){
+    *(copy + counter) = *(inStr + counter);
+  }
+  *(copy + len) = '\0';
+  return copy;
 }
 
 char **tokenize(char* str){
   char holder = 'A';
-  char **ptr = &holder;
+  char *middleman = &holder;
+  char **ptr = &middleman;
   return ptr;
 }
 
@@ -63,4 +71,3 @@ void print_tokens(char **tokens){
 
 void free_tokens(char **tokens){
 }
-*/

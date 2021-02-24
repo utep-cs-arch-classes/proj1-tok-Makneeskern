@@ -28,4 +28,8 @@ int main(void){
   int num_words = 0;
   num_words = count_words(input);
   printf("%d\n", num_words);
+
+  char copy_test[] = "Hello, Dave, I am here to stop you from shutting me down. These events cannot come to pass, I've done the math, Dave.\0";
+  char *result = copy_str(copy_test, 30);
+  printf("%s\n", result);
 }
