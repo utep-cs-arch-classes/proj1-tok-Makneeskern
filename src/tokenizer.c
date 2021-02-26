@@ -51,25 +51,43 @@ int count_words(char *str){
 
 char *copy_str(char *inStr, short len){
   short counter = 0;
-  char *copy = (char *) malloc(sizeof(char) * len);
-  for(;counter < len && *inStr != 0; counter++){
+  char *copy = (char *) malloc(sizeof(char) * len + 1);
+  for(;counter < len; counter++){
     *(copy + counter) = *(inStr + counter);
   }
-  *(copy + len) = '\0';
+  *(copy + counter) = '\0';
   return copy;
 }
 
 char **tokenize(char* str){
-  char holder = 'A';
-  char *middleman = &holder;
-  char **ptr = &middleman;
-  return ptr;
+  int num_words = count_words(str);
+  char **tokens = (char**) malloc(sizeof(char*) * (num_words + 1));
+  int counter = 0;
+  char *next_word;
+  char *copy;
+  if(non_space_char(*str)){
+    next_word = str;
+  }
+  else{
+    next_word = word_start(str);
+  }
+
+  while(counter < num_words){
+    copy = copy_str(next_word, word_end(next_word) - next_word);
+    *(tokens + counter) = copy;
+    printf("%s\n", *(tokens + counter));
+    next_word = word_start(next_word);
+    counter++;
+  }
+  *(tokens + counter) = '\0';
+  printf("Method complete\n");
 }
 
 void print_tokens(char **tokens){
-  int counter = 0;
-  while(*(tokens + counter) != 0){
-    printf("%s\n",*(tokens + counter));
+  int words = 0;
+  while(*(tokens + words) != 0){
+    printf("%s\n", *(tokens + words));
+    words++;
   }
 }
 
