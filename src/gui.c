@@ -3,16 +3,18 @@
 #include "tokenizer.h"
 
 int main(void){
-  char raw_in[100];
   int counter = 0;
+  char *input = (char*) malloc(sizeof(char) * 100);
 
-  while(counter < 100 && (raw_in[counter] = getchar()) != '\n'){
+  while(counter < 100 && (*(input + counter) = getchar()) != '\n'){
     counter++;
   }
 
-  char *input = raw_in;
   *(input + counter+ 1) = '\0';
-  char **tokens = (char**)malloc(sizeof(char*) * (count_words(input) + 1));
-  tokens = tokenize(input);
-  printf("%s\n", *tokens);
+  char **tokens = tokenize(input);
+
+  print_tokens(tokens);
+
+  free_tokens(tokens);
+  
 }

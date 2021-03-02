@@ -75,12 +75,11 @@ char **tokenize(char* str){
   while(counter < num_words){
     copy = copy_str(next_word, word_end(next_word) - next_word);
     *(tokens + counter) = copy;
-    printf("%s\n", *(tokens + counter));
     next_word = word_start(next_word);
     counter++;
   }
   *(tokens + counter) = '\0';
-  printf("Method complete\n");
+  return tokens;
 }
 
 void print_tokens(char **tokens){
@@ -92,4 +91,10 @@ void print_tokens(char **tokens){
 }
 
 void free_tokens(char **tokens){
+  int counter = 0;
+  while(*(tokens + counter) != 0){
+    free(*(tokens + counter));
+    counter++;
+  }
+  free(tokens);
 }
