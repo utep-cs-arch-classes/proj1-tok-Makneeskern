@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tokenizer.h"
+#include "history.h"
 
 int main(void){
   int counter = 0;
@@ -15,6 +16,12 @@ int main(void){
 
   print_tokens(tokens);
 
-  free_tokens(tokens);
-  
+  List *history = init_history();
+  counter = 0;
+  while(*(tokens + counter) != 0){
+    add_history(history, *(tokens + counter));
+    counter++;
+  }
+
+  printf("Everything went off without a hitch...\nhopefully.");
 }
