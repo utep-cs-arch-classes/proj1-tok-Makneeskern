@@ -23,6 +23,14 @@ void add_history(List *list, char *str){
 }
 
 char *get_history(List *list, int id){
+  Item *current_entry = list->root;
+  while(current_entry->id != -1){
+    if(current_entry->id = id){
+      return current_entry->str;
+    }
+  }
+  printf("Invalid ID entered.");
+  return "\0";
 }
 
 void print_history(List *list){
@@ -34,4 +42,5 @@ void print_history(List *list){
 }
 
 void free_history(List *list){
+  free(list);
 }
