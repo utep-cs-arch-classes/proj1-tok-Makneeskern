@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "tokenizer.h"
 #include "history.h"
+
+void joke(void);
+void commands(void);
+int input_command(char *in);
+int str_to_int(char *str, int digits);
 
 int main(void){
   int counter = 0;
@@ -15,11 +21,12 @@ int main(void){
   while(1){
     new_instruction = 0;
     counter = 0;
+    input = (char*) malloc(sizeof(char) * 100);
     printf("$ ");
     while((*(input + counter) = getchar()) != '\n' && counter < 100){
       if(*(input + counter) == '|'){
 	instruction_start = input + counter;
-	new_instrction = 1;
+	new_instruction = 1;
       }
       counter++;
     }
@@ -32,16 +39,16 @@ int main(void){
     switch (new_instruction){
     case -1 :
       //Invalid command
-      printf("Sorry, The command you input was unrecognized. For a complete list of valid commands type \"|C\".");
+      printf("Sorry, The command you input was unrecognized. For a complete list of valid commands type \"|C\".\n");
       break;
     case 1:
       //Quit
-      printf("Thank you for your time. Have a great day! :)");
-      return;
+      printf("Thank you for your time. Have a great day! :)\n");
+      return 0;
     case 2:
       //free tokens
       free_tokens(tokens);
-      printf("Tokens freed!");
+      printf("Tokens freed!\n");
       break;
     case 3:
       //print all elements in history
@@ -51,12 +58,14 @@ int main(void){
       //print element with X id in History
       id_len = (word_end(instruction_start + 2) - (instruction_start + 2));
       instruction_start = copy_str(instruction_start + 2, id_len);
-      instruction_start = get_history(history, (int)instruction_start);
+      id_len = str_to_int(instruction_start, id_len);
+      instruction_start = get_history(history, id_len);
       printf("%s\n", instruction_start);
       break;
     case 5:
       //free History
       free_history(history);
+      history = init_history();
       break;
     }
   }
@@ -73,7 +82,7 @@ int input_command(char *in){
     return 1;
   }
   else if(*(in + 1) == 'T'){
-    else if(*(in + 2) == 'F'){
+    if(*(in + 2) == 'F'){
       return 2;
     }
     else return -1;
@@ -110,8 +119,12 @@ void joke(void){
   printf("The joke is that you believed this command would do anything funny.");
 }
 
-void quit(char **tokens, List *history){
-  printf("Thank you for participating. Goodbye.");
-  free_tokens(tokens);
-  free_history(history);
+int str_to_int(char *str, int digits){
+  int result = 0;
+  int counter = 0;
+  while(digits > counter){
+    result = (result * 10) + (*(str + counter) - '0');
+    counter++;
+  }
+  return result;
 }

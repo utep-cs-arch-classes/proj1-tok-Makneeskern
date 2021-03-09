@@ -22,12 +22,13 @@ void add_history(List *list, char *str){
   current_entry->next->id = -1;
 }
 
-char *get_history(List *list, int id){
+char *get_history(List *list, int selected_id){
   Item *current_entry = list->root;
   while(current_entry->id != -1){
-    if(current_entry->id = id){
+    if(current_entry->id == selected_id){
       return current_entry->str;
     }
+    current_entry = current_entry->next;
   }
   printf("Invalid ID entered.");
   return "\0";
